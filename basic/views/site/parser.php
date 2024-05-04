@@ -1,21 +1,25 @@
-<?php
+<?php /** @noinspection PhpUndefinedClassInspection */
 
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'Parse results';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        <?= $content ?>
+        Parsed letter data:
     </p>
 
-<!--    <code>--><?php //= __FILE__ ?><!--</code>-->
+    <?php /** @var array $content */?>
+    <?php
+
+        echo "<pre>";
+        var_dump($content);
+        echo "</pre>";
+
+    ?>
 </div>

@@ -1,16 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\controllers;
 
-use PhpMimeMailParser\Parser;
+use app\models\Parser;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
+/**
+ * @method render(string $string, array $array)
+ */
 class SiteController extends Controller
 {
     /**
@@ -55,28 +58,19 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionIndex()
+    {
+        return $this->render('index', []);
+    }
+
     public function actionParser()
     {
-        $path = '../../asos.eml';
-        $parser = new Parser();
-        $parser->setStream(fopen($path, "r"));
-        $body = $parser->getMessageBody('htmlEmbedded');
-        $matches = [];
-        preg_match_all('/<img[^>]+products[^>]+alt=\"[^>]+\"[^>]*>((?!\/tbody).)*/', $body,$matches);
-
-
-//        echo "<pre>";
-//        var_dump($matches[0]);
-//        echo "</pre>";
-//        die;
+        $model = new Parser();
 
         return $this->render(
-            'parser'
-            ,
+            'parser',
             [
-                'content' =>
-                    $body
-//                    count($matches)
+                'content' => $model->parse()
             ]
         );
     }

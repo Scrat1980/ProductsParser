@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\controllers;
 
-use app\models\Parser;
+use app\models\Order;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -65,7 +65,7 @@ class SiteController extends Controller
 
     public function actionParser()
     {
-        $model = new Parser();
+        $model = new Order();
 
         return $this->render(
             'parser',
